@@ -4,14 +4,14 @@ by [Valerio Morelli](https://github.com/MrPio).
 ## The problem definition
 Let $\mathcal{A}$ be an alphabet of $n$ ordinal elements, i.e. within which an ordering relation is defined. **We ask how many sequences of elements of $\mathcal{A}$, of length $l$, can be constructed so that they are non-monotone**.
 
-For instance, if $\mathcal{A}=\{1,2,3,4,5\}$, with $a_1\prec a_2 \iff a_1 < a_2$, and $l=4$, some non-monotone sequences are: $[1,3,5,2]$, $[4,1,4,4]$ and $[1,5,1,5]$, but not $[1,1,1,1]$ nor $[5,3,3,2]$.
+For instance, if $\mathcal{A}=${ $1,2,3,4,5$ }, with $a_1\prec a_2 \iff a_1 < a_2$, and $l=4$, some non-monotone sequences are: $[1,3,5,2]$, $[4,1,4,4]$ and $[1,5,1,5]$, but not $[1,1,1,1]$ nor $[5,3,3,2]$.
 
 ## Total enumeration
 A first approach to tackle the problem is the brute force method.
 
 Let $\mathcal{P}([a_1,a_2,...,a_l])=\exists{i} (a_i\le a_{i+1}) \wedge \exists{j} (a_j\ge a_{j+1})$:
 1. List all the solutions $\mathbf{a}=[a_1,a_2,...,a_l]$, with $a_i\in \mathcal{A}, \forall i: 1\leq i\leq l$,
-2. Evaluate which of them satisfy the property $\mathcal{P}$, namely, find $\xi=\{\mathbf{a}|\mathcal{P}(\mathbf{a})\}$,
+2. Evaluate which of them satisfy the property $\mathcal{P}$, namely, find $\xi=${ $\mathbf{a}|\mathcal{P}(\mathbf{a})$ },
 3. Determine $|\xi|$.
 
 This algorithm clearly has an exponentially growing search space. Furthermore, since it evaluates every solution, its complexity is exponential.
@@ -46,7 +46,7 @@ The two problems are equivalent since
 
 $$B(n,l)=n^l-2\times A(n,l)+n,$$ 
 
-where $n^l$ is the number of possible sequences, i.e. $|\{[a_1,...,a_l]|a_i\in \mathcal{A}, \forall i: 1\leq i\leq l\}| =|\mathcal{A}|^l=n^l$ and $2\times A(n,l)-n$ is the number of all possible non-decreasing monotone sequences plus the number of all possible non-increasing monotone sequences minus n, i.e. the number of all possible constant sequences, which would otherwise be counted twice.
+where $n^l$ is the number of possible sequences, i.e. $|$ { $[a_1,...,a_l]|a_i\in \mathcal{A}, \forall i: 1\leq i\leq l$ } $| =|\mathcal{A}|^l=n^l$ and $2\times A(n,l)-n$ is the number of all possible non-decreasing monotone sequences plus the number of all possible non-increasing monotone sequences minus n, i.e. the number of all possible constant sequences, which would otherwise be counted twice.
 
 In Python terms, the function $B$ is defined as follows:
 
