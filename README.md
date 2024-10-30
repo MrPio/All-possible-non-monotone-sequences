@@ -71,10 +71,7 @@ In Python terms, the function $A$ is defined as follows:
 ```python
 def A(n: int, l: int) -> int:
     return n if l == 1 else sum(A(n-i, l-1) for i in range(n))
-
-B(n, l)
 ```
-
 
 For $n=26$ and $l=5$, the code found the same solution as before, i.e. $11,596,390$, with an average time of $5.2$ milliseconds on the same hardware. This is 3,250 times faster than the brute force algorithm.
 
@@ -151,8 +148,6 @@ def G(n): return (n*(n+1))//2
 
 def A(n, l):
     return sum(G(n-i)*comb(l+i-3, i, exact=True) for i in range(n))
-
-B(26, 5)
 ```
 
 <p align="center">
