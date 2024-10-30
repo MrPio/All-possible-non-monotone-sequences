@@ -42,7 +42,10 @@ Since the total enumeration method is intractable, we'll look for a better appro
 The goal is to find the function $B(n,l)$, defined as **the number of all possible *non-monotone* sequences of length $l$, of an alphabet of length $n$**.
 However, for simplicity reasons, we choose to consider the complementary problem, namely finding the function $A(n,l)$ defined as **the number of all the possible *non-decreasing monotone* sequences**.
 
-The two problems are equivalent since $$B(n,l)=n^l-2\times A(n,l)+n,$$ 
+The two problems are equivalent since 
+
+$$B(n,l)=n^l-2\times A(n,l)+n,$$ 
+
 where $n^l$ is the number of possible sequences, i.e. $|\{[a_1,...,a_l]|a_i\in \mathcal{A}, \forall i: 1\leq i\leq l\}| =|\mathcal{A}|^l=n^l$ and $2\times A(n,l)-n$ is the number of all possible non-decreasing monotone sequences plus the number of all possible non-increasing monotone sequences minus n, i.e. the number of all possible constant sequences, which would otherwise be counted twice.
 
 In Python terms, the function $B$ is defined as follows:
@@ -53,11 +56,14 @@ def B(n, l):
 ```
 
 ### The recursive approach
-At some expense, we can define the $A$ function as $$A(n,l)=
+At some expense, we can define the $A$ function as 
+
+$$A(n,l)=
     \begin{cases}
       \sum_{i=0}^{n-1}{A(n-i,l-1)} &\text{if } l>1\\
       n &\text{if } l=1
     \end{cases}.$$
+    
 We observe that, for $l=2$, $A$ becomes the Gauss function, i.e. $A(n,2)=G(n)=\dfrac{n(n+1)}{2}$.
 
 In Python terms, the function $A$ is defined as follows:
@@ -109,7 +115,9 @@ Following the reasoning described above, we can expand the table for $l=4$ as sh
 
 It is clear that whatever the size of $l$, the rows added to the table are always chosen between those in the table for $l=3$. So we can reduce the whole counting function to a **linear combination of the $n$ rows** $[n,n-1,...,1],[n-1,n-2,...,1],...,[1]$, where their sums are $A(n,2), A(n-1,2),...,A(1,2) = \frac{n(n+1)}{2}, \frac{(n-1)n}{2}, ..., 1$.
 
-Therefore $A(n,l)=\lambda_n^l A(n,2) + \lambda_{n-1}^l A(n-1,2) + ...+\lambda_1^l A(1,2)$
+Therefore 
+
+$$A(n,l)=\lambda_n^l A(n,2) + \lambda_{n-1}^l A(n-1,2) + ...+\lambda_1^l A(1,2).$$
 
 ### Pascal's triangle
 
@@ -121,10 +129,13 @@ Starting from $l=3$, where all the coefficients are obviously equal to 1, we can
 
 <table><thead><tr><th colspan="4"></th><th>l=3<br></th><th>l=4</th><th>l=5</th><th>l=6</th><th>l=7</th><th>l=8</th><th>l=9</th><th>l=10</th></tr></thead><tbody><tr><td colspan="4">4 3 2 1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td colspan="4">3 2 1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr><tr><td colspan="4">2 1</td><td>1</td><td>3</td><td>6</td><td>10</td><td>15</td><td>21</td><td>28</td><td>36</td></tr><tr><td colspan="4">1</td><td>1</td><td>4</td><td>10</td><td>20</td><td>35</td><td>56</td><td>84</td><td>120</td></tr></tbody></table>
 
-This is the **Pascal's triangle**. From the theory we can derive that $$\lambda_i^l=\binom{i+(l-3)}{i}.$$
+This is the **Pascal's triangle**. From the theory, we can derive that 
+
+$$\lambda_i^l=\binom{i+(l-3)}{i}.$$
 
 ### The closed formula
-Putting all together, we end up with:
+Putting it all together, we end up with:
+
 $$A(n,l)=\sum_{i=0}^{n-1}{\dfrac{(n-1)(n-i+1)}{2}\times \binom{i+(l-3)}{i}}.$$
 
 The formula for the original problem is thus
