@@ -21,7 +21,7 @@ The total enumeration algorithm can be implemented without a great deal of effor
 
 In the following, we will consider $\mathcal{A}$ to be the alphabet of 26 Latin letters, thus $n=26$. So the problem is to find the number of all possible strings of length $l$ where the letters are not in non-decreasing or non-increasing order.
 
-```[python]
+```python
 def is_monotone(seq: list[int], non_decreasing: bool) -> bool:
     return all(x <= y if non_decreasing else x >= y for x, y in zip(seq[:-1], seq[1:]))
 
@@ -47,7 +47,7 @@ where $n^l$ is the number of possible sequences, i.e. $|\{[a_1,...,a_l]|a_i\in \
 
 In Python terms, the function $B$ is defined as follows:
 
-```[python]
+```python
 def B(n, l):
     return n**l - 2*A(n, l) + n
 ```
@@ -62,7 +62,7 @@ We observe that, for $l=2$, $A$ becomes the Gauss function, i.e. $A(n,2)=G(n)=\d
 
 In Python terms, the function $A$ is defined as follows:
 
-```[python]
+```python
 def A(n: int, l: int) -> int:
     return n if l == 1 else sum(A(n-i, l-1) for i in range(n))
 
@@ -133,7 +133,7 @@ $$B(n,l)=n^l-2\times \sum_{i=0}^{n-1}{\dfrac{(n-1)(n-i+1)}{2}\times \binom{i+(l-
 
 The Python implementation, shows the same results as the previous approaches, but with a linear time complexity $\mathcal{O}(l)$.
 
-```[python]
+```python
 from scipy.special import comb
 
 def G(n): return (n*(n+1))//2
