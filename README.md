@@ -99,12 +99,12 @@ The reason is as follows:
 
 It is clear that we need at least 3 elements to create a non-monotone sequence, so let's consider $l=3$. The possible configurations can be summarised in the following table, where the cell contains the possible values for the sequence element $a_1$, given the values of the other two elements $a_2$ and $a_3$. Summing up all the cells gives us $A(4,3)$.
 
-||$a_2=1$|$a_2=2$|$a_2=3$|$a_2=4$|
-|---|:---:|:---:|:---:|:---:|
-|$a_3=1$| 4 | 3 | 2 | 1 |
-|$a_3=2$| -  | 3 | 2 | 1 |
-|$a_3=3$|  - | -  | 2 | 1 |
-|$a_3=4$|   -|-   | -  | 1 |
+|         | $a_2=1$ | $a_2=2$ | $a_2=3$ | $a_2=4$ |
+| ------- | :-----: | :-----: | :-----: | :-----: |
+| $a_3=1$ |    4    |    3    |    2    |    1    |
+| $a_3=2$ |    -    |    3    |    2    |    1    |
+| $a_3=3$ |    -    |    -    |    2    |    1    |
+| $a_3=4$ |    -    |    -    |    -    |    1    |
 
 Following the reasoning described above, we can expand the table for $l=4$ as shown below.
 
@@ -133,11 +133,11 @@ $$\lambda_i^l=\binom{i+(l-3)}{i}.$$
 ### The closed formula
 Putting it all together, we end up with:
 
-$$A(n,l)=\sum_{i=0}^{n-1}{\dfrac{(n-1)(n-i+1)}{2}\times \binom{i+(l-3)}{i}}.$$
+$$A(n,l)=\sum_{i=0}^{n-1}{\dfrac{(n-1)(n-i)}{2}\times \binom{i+(l-3)}{i}}.$$
 
 The formula for the original problem is thus
 
-$$B(n,l)=n^l-2\times \sum_{i=0}^{n-1}{\dfrac{(n-1)(n-i+1)}{2}\times \binom{i+(l-3)}{i}}+n.$$ 
+$$B(n,l)=n^l-2\times \sum_{i=0}^{n-1}{\dfrac{(n-1)(n-i)}{2}\times \binom{i+(l-3)}{i}}+n.$$ 
 
 The Python implementation, shows the same results as the previous approaches, but with a linear time complexity $\mathcal{O}(l)$.
 
